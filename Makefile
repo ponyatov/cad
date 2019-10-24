@@ -12,3 +12,10 @@ MERGE += CAD.py CAD.ini
 merge:
 	git checkout master
 	git checkout ponyatov -- $(MERGE)
+
+NOW = $(shell date +%d%m%y)
+REL = $(shell git rev-parse --short=4 HEAD)
+update:
+	- git tag $(NOW)-$(REL)
+	git push --tags
+	git checkout ponyatov
